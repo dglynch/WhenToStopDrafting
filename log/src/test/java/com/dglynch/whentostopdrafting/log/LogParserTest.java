@@ -72,4 +72,11 @@ class LogParserTest {
         Map<String, Integer> missingCollection = logParser.readCollection();
         assertThat(missingCollection, is(anEmptyMap()));
     }
+
+    @Test
+    void readCollectionReturnsEmptyMapWhenInputDataIsMalformed() {
+        LogParser logParser = new LogParser("src/test/resources/malformedcollection.log");
+        Map<String, Integer> malformedCollection = logParser.readCollection();
+        assertThat(malformedCollection, is(anEmptyMap()));
+    }
 }

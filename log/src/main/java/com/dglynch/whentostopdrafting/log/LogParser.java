@@ -19,6 +19,7 @@
 
 package com.dglynch.whentostopdrafting.log;
 
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class LogParser {
                     .get("payload").getAsJsonObject()
                     .entrySet().stream()
                     .collect(Collectors.toMap(Map.Entry::getKey, x -> x.getValue().getAsInt()));
-        } catch (IOException | NoSuchElementException e) {
+        } catch (IOException | NoSuchElementException | JsonParseException e) {
             return Map.of();
         }
     }
