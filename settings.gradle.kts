@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "WhenToStopDrafting"
-include("app", "list", "utilities")
+include("app")

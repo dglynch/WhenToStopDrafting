@@ -3,16 +3,7 @@
  */
 package com.dglynch.whentostopdrafting.app;
 
-import com.dglynch.whentostopdrafting.list.LinkedList;
-
-import static com.dglynch.whentostopdrafting.utilities.StringUtils.join;
-import static com.dglynch.whentostopdrafting.utilities.StringUtils.split;
-import static com.dglynch.whentostopdrafting.app.MessageUtils.getMessage;
-
 public class App {
     public static void main(String[] args) {
-        LinkedList tokens;
-        tokens = split(getMessage());
-        System.out.println(join(tokens));
     }
 }
