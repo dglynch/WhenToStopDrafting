@@ -7,3 +7,10 @@ set and open all their booster packs, especially if they are following
 Currently, the program is only capable of reading the player's collection data from the game log, and printing it to
 the console. The remaining features will be added in the future. The project is not useful yet, but contributions
 and criticism are welcome.
+
+## License
+
+When To Stop Drafting is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. See [COPYING](COPYING) for details.
