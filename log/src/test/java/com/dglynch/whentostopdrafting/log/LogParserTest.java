@@ -19,6 +19,7 @@
 
 package com.dglynch.whentostopdrafting.log;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -28,20 +29,34 @@ import static org.hamcrest.Matchers.*;
 
 class LogParserTest {
 
-    @Test
-    void readCollection() {
+    private static Map<String, Integer> collection;
+
+    @BeforeAll
+    static void beforeAll() {
         LogParser logParser = new LogParser("src/test/resources/collection.log");
+        collection = logParser.readCollection();
+    }
 
-        Map<String, Integer> actual = logParser.readCollection();
+    @Test
+    void readCollectionHasExpectedSize() {
+        assertThat(collection, is(aMapWithSize(1824)));
+    }
 
-        assertThat(actual, is(aMapWithSize(1824)));
+    @Test
+    void readCollectionContainsSomeExpectedEntries() {
+        assertThat(collection, hasEntry("69628", 1));
+        assertThat(collection, hasEntry("69689", 2));
+        assertThat(collection, hasEntry("73241", 3));
+        assertThat(collection, hasEntry("73205", 4));
+    }
 
-        assertThat(actual, hasEntry("69628", 1));
-        assertThat(actual, hasEntry("69689", 2));
-        assertThat(actual, hasEntry("73241", 3));
-        assertThat(actual, hasEntry("73205", 4));
+    @Test
+    void readCollectionDoesNotContainAnyEntryWithCountTooHigh() {
+        assertThat(collection, not(hasValue(greaterThan(4))));
+    }
 
-        assertThat(actual, not(hasValue(greaterThan(4))));
-        assertThat(actual, not(hasValue(lessThan(1))));
+    @Test
+    void readCollectionDoesNotContainAnyEntryWithCountTooLow() {
+        assertThat(collection, not(hasValue(lessThan(1))));
     }
 }
