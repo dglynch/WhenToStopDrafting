@@ -59,4 +59,10 @@ class LogParserTest {
     void readCollectionDoesNotContainAnyEntryWithCountTooLow() {
         assertThat(collection, not(hasValue(lessThan(1))));
     }
+
+    @Test
+    void readCollectionOnlyTakesDataFromMostRecentPlayerInventory() {
+        assertThat(collection, hasEntry("69855", 3));
+        assertThat(collection, hasEntry("72017", 4));
+    }
 }
