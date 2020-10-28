@@ -1,2 +1,2 @@
 rootProject.name = "WhenToStopDrafting"
-include("app")
+include("app", "log")
