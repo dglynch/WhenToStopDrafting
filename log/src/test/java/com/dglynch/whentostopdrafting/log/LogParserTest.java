@@ -65,4 +65,11 @@ class LogParserTest {
         assertThat(collection, hasEntry("69855", 3));
         assertThat(collection, hasEntry("72017", 4));
     }
+
+    @Test
+    void readCollectionReturnsEmptyMapWhenInputDataIsMissing() {
+        LogParser logParser = new LogParser("src/test/resources/missingcollection.log");
+        Map<String, Integer> missingCollection = logParser.readCollection();
+        assertThat(missingCollection, is(anEmptyMap()));
+    }
 }
