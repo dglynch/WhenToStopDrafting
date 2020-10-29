@@ -21,7 +21,7 @@ package com.dglynch.whentostopdrafting;
 
 import java.util.Map;
 
-public class App {
+public class ConsoleApplication {
     private static final String PLAYER_LOG_FILE_PATH =
             System.getProperty("user.home") + "/AppData/LocalLow/Wizards Of The Coast/MTGA/Player.log";
 
