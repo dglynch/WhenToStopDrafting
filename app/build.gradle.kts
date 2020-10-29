@@ -7,5 +7,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.dglynch.whentostopdrafting.app.App")
+    mainClass.set("com.dglynch.whentostopdrafting.App")
 }

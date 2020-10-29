@@ -17,9 +17,7 @@
     this program; if not, see <http://www.gnu.org/licenses>.
 */
 
-package com.dglynch.whentostopdrafting.app;
-
-import com.dglynch.whentostopdrafting.log.LogParser;
+package com.dglynch.whentostopdrafting;
 
 import java.util.Map;
 

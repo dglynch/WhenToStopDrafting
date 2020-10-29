@@ -17,7 +17,7 @@
     this program; if not, see <http://www.gnu.org/licenses>.
 */
 
-package com.dglynch.whentostopdrafting.log;
+package com.dglynch.whentostopdrafting;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
