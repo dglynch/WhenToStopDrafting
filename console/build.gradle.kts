@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":log"))
+    implementation(project(":data"))
 }
 
 application {
