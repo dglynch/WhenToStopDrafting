@@ -17,7 +17,7 @@
     this program; if not, see <http://www.gnu.org/licenses>.
 */
 
-package com.dglynch.whentostopdrafting.log;
+package com.dglynch.whentostopdrafting;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
