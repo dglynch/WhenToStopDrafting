@@ -19,17 +19,20 @@
 
 package com.dglynch.whentostopdrafting;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class ConsoleApplication {
-    private static final String PLAYER_LOG_FILE_PATH =
+    private static final String DEFAULT_PLAYER_LOG_FILE_PATH =
             System.getProperty("user.home") + "/AppData/LocalLow/Wizards Of The Coast/MTGA/Player.log";
 
     public static void main(String[] args) {
-        LogParser logParser = new LogParser(PLAYER_LOG_FILE_PATH);
+        String playerLogFilePath = Arrays.stream(args).findFirst().orElse(DEFAULT_PLAYER_LOG_FILE_PATH);
+        LogParser logParser = new LogParser(playerLogFilePath);
+
         Map<String, Integer> collection = logParser.readCollection();
         if (collection.isEmpty()) {
-            System.out.println("No collection data found at " + PLAYER_LOG_FILE_PATH);
+            System.out.println("No collection data found at " + playerLogFilePath);
         } else {
             collection.forEach((key, value) -> System.out.println(value + " " + key));
         }
