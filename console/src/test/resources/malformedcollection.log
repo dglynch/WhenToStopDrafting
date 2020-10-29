@@ -1,0 +1,6 @@
+Pubnub Client created successfully.
+Registering PubNub listeners.
+Subscribing to PubNub.
+Initializing presence from social
+[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerCardsV3 {"id":7,"payload":{"this is malformed data
+[UnityCrossThreadLogger]<== PlayerInventory.GetCatalogStatus {"id":8,"payload":{"disabledTags":[],"disabledNames":["Preorder_IKO_Lukka","Preorder_IKO_SkycatCub","Preorder_IKO_Vivien","20200429_DeadlyRollick_DA","20200429_DeflectingSwat_DA","20200429_FierceGuardianship_DA","20200429_FlawlessManeuver_DA","20200429_ObscuringHaze_DA","Preorder_M21_Pack_Bundle","Preorder_M21_Pet","Preorder_M21_Play_Bundle","Bundle_Explorer","Preorder_ZNR_Pack_Bundle","Preorder_ZNR_Pet","Preorder_ZNR_Play_Bundle","MTGA_CardBack_ExtraLife_2020_Logo","MTGA_Preorder_KLR"],"codeRedemptionEnabled":true}}
