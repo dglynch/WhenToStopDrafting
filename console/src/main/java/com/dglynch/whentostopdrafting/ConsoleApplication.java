@@ -19,22 +19,41 @@
 
 package com.dglynch.whentostopdrafting;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
 public class ConsoleApplication {
     private static final String DEFAULT_PLAYER_LOG_FILE_PATH =
             System.getProperty("user.home") + "/AppData/LocalLow/Wizards Of The Coast/MTGA/Player.log";
+    private static final String DEFAULT_DATA_FILE_PATH_PREFIX =
+            System.getenv("ProgramFiles") + "/Wizards of the Coast/MTGA/MTGA_Data/Downloads/Data/";
 
     public static void main(String[] args) {
         String playerLogFilePath = Arrays.stream(args).findFirst().orElse(DEFAULT_PLAYER_LOG_FILE_PATH);
-        LogParser logParser = new LogParser(playerLogFilePath);
+        String dataFilePathPrefix = Arrays.stream(args).skip(1).findFirst().orElse(DEFAULT_DATA_FILE_PATH_PREFIX);
 
-        Map<String, Integer> collection = logParser.readCollection();
-        if (collection.isEmpty()) {
-            System.out.println("No collection data found at " + playerLogFilePath);
-        } else {
-            collection.forEach((key, value) -> System.out.println(value + " " + key));
+        try {
+            DownloadsDataFileFinder downloadsDataFileFinder = new DownloadsDataFileFinder(dataFilePathPrefix);
+
+            String localizationDataFilePath = downloadsDataFileFinder.findFilePath("loc");
+            LocalizationDataParser localizationDataParser = new LocalizationDataParser(localizationDataFilePath);
+            Map<Integer, String> localization = localizationDataParser.readLocalization();
+
+            String cardsDataFilePath = downloadsDataFileFinder.findFilePath("cards");
+            CardsDataParser cardsDataParser = new CardsDataParser(cardsDataFilePath, localization);
+            Map<Integer, String> cards = cardsDataParser.readCards();
+
+            LogParser logParser = new LogParser(playerLogFilePath);
+            Map<String, Integer> collection = logParser.readCollection();
+
+            if (collection.isEmpty()) {
+                System.out.println("No collection data found at " + playerLogFilePath);
+            } else {
+                collection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key))));
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to find required data files at " + dataFilePathPrefix);
         }
     }
 }
