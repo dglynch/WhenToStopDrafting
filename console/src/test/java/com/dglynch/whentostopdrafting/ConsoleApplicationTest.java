@@ -30,7 +30,7 @@ import static org.hamcrest.Matchers.*;
 class ConsoleApplicationTest {
 
     @Test
-    void mainPrintsSomethingToTheConsoleWhenUsingDefaultPlayerLogFilePath() throws Exception {
+    void mainPrintsSomethingToTheConsoleWhenUsingAllDefaultArguments() throws Exception {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[0]);
         });
@@ -38,18 +38,18 @@ class ConsoleApplicationTest {
     }
 
     @Test
-    void mainPrintsExpectedCollectionDataWhenValidPlayerLogFilePathIsSpecified() throws Exception {
+    void mainPrintsExpectedCollectionDataWhenValidArgumentsAreSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/collection.log"});
+            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
         });
-        assertThat(text, containsString("2 66923\n"));
-        assertThat(text, containsString("4 69943\n"));
+        assertThat(text, containsString("2 Atzocan Seer\n"));
+        assertThat(text, containsString("4 Scampering Scorcher\n"));
     }
 
     @Test
     void mainPrintsExpectedMessageWhenSpecifiedPlayerLogFileIsMissingCollectionData() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/missingcollection.log"});
+            ConsoleApplication.main(new String[]{"src/test/resources/missingcollection.log", "src/test/resources/"});
         });
         assertThat(text, is(equalTo("No collection data found at src/test/resources/missingcollection.log\n")));
     }
@@ -57,7 +57,7 @@ class ConsoleApplicationTest {
     @Test
     void mainPrintsExpectedMessageWhenCollectionDataInSpecifiedPlayerLogFileIsMalformed() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/malformedcollection.log"});
+            ConsoleApplication.main(new String[]{"src/test/resources/malformedcollection.log", "src/test/resources/"});
         });
         assertThat(text, is(equalTo("No collection data found at src/test/resources/malformedcollection.log\n")));
     }
@@ -65,8 +65,16 @@ class ConsoleApplicationTest {
     @Test
     void mainPrintsExpectedMessageWhenInvalidPlayerLogFilePathIsSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"foobarbaz"});
+            ConsoleApplication.main(new String[]{"foobarbaz", "src/test/resources/"});
         });
         assertThat(text, is(equalTo("No collection data found at foobarbaz\n")));
+    }
+
+    @Test
+    void mainPrintsExpectedMessageWhenInvalidDownloadsDataPathPrefixIsSpecified() throws Exception {
+        String text = tapSystemOutNormalized(() -> {
+            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/foobarbaz/"});
+        });
+        assertThat(text, is(equalTo("Failed to find required data files at src/test/resources/foobarbaz/\n")));
     }
 }
