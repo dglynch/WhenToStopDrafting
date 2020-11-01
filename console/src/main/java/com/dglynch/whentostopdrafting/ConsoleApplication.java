@@ -22,6 +22,7 @@ package com.dglynch.whentostopdrafting;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ConsoleApplication {
     private static final String DEFAULT_PLAYER_LOG_FILE_PATH =
@@ -50,7 +51,13 @@ public class ConsoleApplication {
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
             } else {
-                collection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key)).getName()));
+                Map<String, Integer> rareCollection = collection
+                        .entrySet()
+                        .stream()
+                        .filter(entry -> cards.get(Integer.valueOf(entry.getKey())).getRarity().equals(Rarity.RARE))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+                rareCollection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key)).getName()));
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);
