@@ -42,8 +42,8 @@ class ConsoleApplicationTest {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
         });
-        assertThat(text, containsString("2 Atzocan Seer\n"));
-        assertThat(text, containsString("4 Scampering Scorcher\n"));
+        assertThat(text, containsString("2 Burning Sun's Avatar\n"));
+        assertThat(text, containsString("4 Emergent Ultimatum\n"));
     }
 
     @Test
