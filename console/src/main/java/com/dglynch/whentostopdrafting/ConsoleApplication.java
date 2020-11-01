@@ -46,18 +46,16 @@ public class ConsoleApplication {
             Map<Integer, Card> cards = cardsDataParser.readCards();
 
             LogParser logParser = new LogParser(playerLogFilePath);
-            Map<String, Integer> collection = logParser.readCollection();
+            Map<Card, Integer> collection = logParser.readCollection().entrySet().stream()
+                    .collect(Collectors.toMap(entry -> cards.get(Integer.valueOf(entry.getKey())), Map.Entry::getValue,
+                            Integer::sum));
 
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
             } else {
-                Map<String, Integer> rareCollection = collection
-                        .entrySet()
-                        .stream()
-                        .filter(entry -> cards.get(Integer.valueOf(entry.getKey())).getRarity().equals(Rarity.RARE))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-                rareCollection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key)).getName()));
+                collection.entrySet().stream()
+                        .filter(entry -> entry.getKey().getRarity().equals(Rarity.RARE))
+                        .forEach(entry -> System.out.println(entry.getValue() + " " + entry.getKey().getName()));
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);
