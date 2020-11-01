@@ -41,17 +41,21 @@ public class CardsDataParser {
         this.localization = localization;
     }
 
-    public Map<Integer, String> readCards() {
+    public Map<Integer, Card> readCards() {
         try {
             String jsonString = Files.readString(Path.of(cardsDataFilePath));
 
-            Map<Integer, String> cards = new HashMap<>();
+            Map<Integer, Card> cards = new HashMap<>();
             JsonParser.parseString(jsonString).getAsJsonArray()
                     .forEach(jsonElement -> {
                         int grpid = jsonElement.getAsJsonObject().get("grpid").getAsInt();
                         int titleId = jsonElement.getAsJsonObject().get("titleId").getAsInt();
+                        int rarityId = jsonElement.getAsJsonObject().get("rarity").getAsInt();
+
                         String cardName = localization.get(titleId);
-                        cards.put(grpid, cardName);
+                        Rarity rarity = Rarity.fromInt(rarityId);
+
+                        cards.put(grpid, new Card(cardName, rarity));
                     });
 
             return Collections.unmodifiableMap(cards);

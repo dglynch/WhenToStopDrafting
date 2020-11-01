@@ -31,7 +31,7 @@ public class CardsDataParserTest {
 
     private static Map<Integer, String> localization;
 
-    private static Map<Integer, String> cards;
+    private static Map<Integer, Card> cards;
 
     @BeforeAll
     static void beforeAll() {
@@ -48,23 +48,25 @@ public class CardsDataParserTest {
 
     @Test
     void readCardsContainsSomeExpectedEntries() {
-        assertThat(cards, hasEntry(69628, "Steady Aim"));
-        assertThat(cards, hasEntry(69689, "God-Pharaoh's Statue"));
-        assertThat(cards, hasEntry(73241, "Concerted Defense"));
-        assertThat(cards, hasEntry(73205, "Kor Blademaster"));
+        assertThat(cards, hasEntry(69628, new Card("Steady Aim", Rarity.COMMON)));
+        assertThat(cards, hasEntry(69689, new Card("God-Pharaoh's Statue", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(73241, new Card("Concerted Defense", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(73205, new Card("Kor Blademaster", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(74676, new Card("Lotus Cobra", Rarity.RARE)));
+        assertThat(cards, hasEntry(70285, new Card("Robber of the Rich", Rarity.MYTHIC_RARE)));
     }
 
     @Test
     void readCardsReturnsEmptyMapWhenInputDataIsMissing() {
         CardsDataParser cardsDataParser = new CardsDataParser("src/test/resources/filedoesnotexist.mtga", localization);
-        Map<Integer, String> missingCards = cardsDataParser.readCards();
+        Map<Integer, Card> missingCards = cardsDataParser.readCards();
         assertThat(missingCards, is(anEmptyMap()));
     }
 
     @Test
     void readCardsReturnsEmptyMapWhenInputDataIsMalformed() {
         CardsDataParser cardsDataParser = new CardsDataParser("src/test/resources/malformedcollection.log", localization);
-        Map<Integer, String> malformedCards = cardsDataParser.readCards();
+        Map<Integer, Card> malformedCards = cardsDataParser.readCards();
         assertThat(malformedCards, is(anEmptyMap()));
     }
 }
