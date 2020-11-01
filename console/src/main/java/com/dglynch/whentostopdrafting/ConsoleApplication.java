@@ -42,7 +42,7 @@ public class ConsoleApplication {
 
             String cardsDataFilePath = downloadsDataFileFinder.findFilePath("cards");
             CardsDataParser cardsDataParser = new CardsDataParser(cardsDataFilePath, localization);
-            Map<Integer, String> cards = cardsDataParser.readCards();
+            Map<Integer, Card> cards = cardsDataParser.readCards();
 
             LogParser logParser = new LogParser(playerLogFilePath);
             Map<String, Integer> collection = logParser.readCollection();
@@ -50,7 +50,7 @@ public class ConsoleApplication {
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
             } else {
-                collection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key))));
+                collection.forEach((key, value) -> System.out.println(value + " " + cards.get(Integer.valueOf(key)).getName()));
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);
