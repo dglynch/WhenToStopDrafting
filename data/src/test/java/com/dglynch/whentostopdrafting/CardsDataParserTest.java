@@ -48,12 +48,12 @@ public class CardsDataParserTest {
 
     @Test
     void readCardsContainsSomeExpectedEntries() {
-        assertThat(cards, hasEntry(69628, new Card("Steady Aim", Rarity.COMMON)));
-        assertThat(cards, hasEntry(69689, new Card("God-Pharaoh's Statue", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(73241, new Card("Concerted Defense", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(73205, new Card("Kor Blademaster", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(74676, new Card("Lotus Cobra", Rarity.RARE)));
-        assertThat(cards, hasEntry(70285, new Card("Robber of the Rich", Rarity.MYTHIC_RARE)));
+        assertThat(cards, hasEntry(69628, new Card(69628, "Steady Aim", Rarity.COMMON)));
+        assertThat(cards, hasEntry(69689, new Card(69689, "God-Pharaoh's Statue", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(73241, new Card(73241, "Concerted Defense", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(73205, new Card(73205, "Kor Blademaster", Rarity.UNCOMMON)));
+        assertThat(cards, hasEntry(74676, new Card(74676, "Lotus Cobra", Rarity.RARE)));
+        assertThat(cards, hasEntry(70285, new Card(70285, "Robber of the Rich", Rarity.MYTHIC_RARE)));
     }
 
     @Test
