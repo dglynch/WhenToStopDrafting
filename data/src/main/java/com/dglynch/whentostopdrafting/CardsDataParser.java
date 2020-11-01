@@ -51,11 +51,12 @@ public class CardsDataParser {
                         int grpid = jsonElement.getAsJsonObject().get("grpid").getAsInt();
                         int titleId = jsonElement.getAsJsonObject().get("titleId").getAsInt();
                         int rarityId = jsonElement.getAsJsonObject().get("rarity").getAsInt();
+                        String set = jsonElement.getAsJsonObject().get("set").getAsString();
 
                         String cardName = localization.get(titleId);
                         Rarity rarity = Rarity.fromInt(rarityId);
 
-                        cards.put(grpid, new Card(grpid, cardName, rarity));
+                        cards.put(grpid, new Card(grpid, cardName, set, rarity));
                     });
 
             return Collections.unmodifiableMap(cards);

@@ -42,8 +42,17 @@ class ConsoleApplicationTest {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
         });
-        assertThat(text, containsString("2 Burning Sun's Avatar\n"));
-        assertThat(text, containsString("4 Emergent Ultimatum\n"));
+        assertThat(text, containsString("2 Roiling Vortex\n"));
+        assertThat(text, containsString("4 Kargan Intimidator\n"));
+    }
+
+    @Test
+    void mainDoesNotPrintCardsNotFromZendikarRising() throws Exception {
+        String text = tapSystemOutNormalized(() -> {
+            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
+        });
+        assertThat(text, not(containsString("Burning Sun's Avatar")));
+        assertThat(text, not(containsString("Emergent Ultimatum")));
     }
 
     @Test

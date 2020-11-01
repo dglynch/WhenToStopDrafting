@@ -31,16 +31,24 @@ public final class Card {
     private final String name;
 
     @NotNull
+    private final String set;
+
+    @NotNull
     private final Rarity rarity;
 
-    public Card(int id, @NotNull String name, @NotNull Rarity rarity) {
+    public Card(int id, @NotNull String name, @NotNull String set, @NotNull Rarity rarity) {
         this.id = id;
         this.name = name;
+        this.set = set;
         this.rarity = rarity;
     }
 
     public @NotNull String getName() {
         return name;
+    }
+
+    public @NotNull String getSet() {
+        return set;
     }
 
     public @NotNull Rarity getRarity() {
@@ -54,12 +62,13 @@ public final class Card {
         Card card = (Card) o;
         return id == card.id &&
                 name.equals(card.name) &&
+                set.equals(card.set) &&
                 rarity == card.rarity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, rarity);
+        return Objects.hash(id, name, set, rarity);
     }
 
     @Override
@@ -67,6 +76,7 @@ public final class Card {
         return "Card{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", set='" + set + '\'' +
                 ", rarity=" + rarity +
                 '}';
     }
