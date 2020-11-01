@@ -55,7 +55,7 @@ public class CardsDataParser {
                         String cardName = localization.get(titleId);
                         Rarity rarity = Rarity.fromInt(rarityId);
 
-                        cards.put(grpid, new Card(cardName, rarity));
+                        cards.put(grpid, new Card(grpid, cardName, rarity));
                     });
 
             return Collections.unmodifiableMap(cards);

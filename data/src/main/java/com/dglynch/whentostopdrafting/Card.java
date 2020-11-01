@@ -25,13 +25,16 @@ import java.util.Objects;
 
 public final class Card {
 
+    private final int id;
+
     @NotNull
     private final String name;
 
     @NotNull
     private final Rarity rarity;
 
-    public Card(@NotNull String name, @NotNull Rarity rarity) {
+    public Card(int id, @NotNull String name, @NotNull Rarity rarity) {
+        this.id = id;
         this.name = name;
         this.rarity = rarity;
     }
@@ -49,19 +52,21 @@ public final class Card {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
-        return name.equals(card.name) &&
+        return id == card.id &&
+                name.equals(card.name) &&
                 rarity == card.rarity;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, rarity);
+        return Objects.hash(id, name, rarity);
     }
 
     @Override
     public String toString() {
         return "Card{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", rarity=" + rarity +
                 '}';
     }

@@ -47,8 +47,7 @@ public class ConsoleApplication {
 
             LogParser logParser = new LogParser(playerLogFilePath);
             Map<Card, Integer> collection = logParser.readCollection().entrySet().stream()
-                    .collect(Collectors.toMap(entry -> cards.get(Integer.valueOf(entry.getKey())), Map.Entry::getValue,
-                            Integer::sum));
+                    .collect(Collectors.toMap(entry -> cards.get(Integer.valueOf(entry.getKey())), Map.Entry::getValue));
 
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
