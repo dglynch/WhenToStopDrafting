@@ -55,6 +55,7 @@ public class ConsoleApplication {
                 collection.entrySet().stream()
                         .filter(entry -> entry.getKey().getRarity().equals(Rarity.RARE))
                         .filter(entry -> entry.getKey().getSet().equals("ZNR"))
+                        .filter(entry -> entry.getKey().isBoosterAvailable())
                         .forEach(entry -> System.out.println(entry.getValue() + " " + entry.getKey().getName()));
             }
         } catch (IOException e) {

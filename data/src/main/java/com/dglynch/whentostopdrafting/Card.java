@@ -36,11 +36,14 @@ public final class Card {
     @NotNull
     private final Rarity rarity;
 
-    public Card(int id, @NotNull String name, @NotNull String set, @NotNull Rarity rarity) {
+    private final boolean boosterAvailable;
+
+    public Card(int id, @NotNull String name, @NotNull String set, @NotNull Rarity rarity, boolean boosterAvailable) {
         this.id = id;
         this.name = name;
         this.set = set;
         this.rarity = rarity;
+        this.boosterAvailable = boosterAvailable;
     }
 
     public @NotNull String getName() {
@@ -55,12 +58,17 @@ public final class Card {
         return rarity;
     }
 
+    public boolean isBoosterAvailable() {
+        return boosterAvailable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Card card = (Card) o;
         return id == card.id &&
+                boosterAvailable == card.boosterAvailable &&
                 name.equals(card.name) &&
                 set.equals(card.set) &&
                 rarity == card.rarity;
@@ -68,7 +76,7 @@ public final class Card {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, set, rarity);
+        return Objects.hash(id, name, set, rarity, boosterAvailable);
     }
 
     @Override
@@ -78,6 +86,7 @@ public final class Card {
                 ", name='" + name + '\'' +
                 ", set='" + set + '\'' +
                 ", rarity=" + rarity +
+                ", boosterAvailable=" + boosterAvailable +
                 '}';
     }
 }
