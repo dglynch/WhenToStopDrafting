@@ -29,6 +29,7 @@ public class ConsoleApplication {
             System.getProperty("user.home") + "/AppData/LocalLow/Wizards Of The Coast/MTGA/Player.log";
     private static final String DEFAULT_DATA_FILE_PATH_PREFIX =
             System.getenv("ProgramFiles") + "/Wizards of the Coast/MTGA/MTGA_Data/Downloads/Data/";
+    private static final int CARDS_PER_PLAYSET = 4;
 
     public static void main(String[] args) {
         String playerLogFilePath = Arrays.stream(args).findFirst().orElse(DEFAULT_PLAYER_LOG_FILE_PATH);
@@ -52,11 +53,21 @@ public class ConsoleApplication {
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
             } else {
-                collection.entrySet().stream()
+                long numberOfAvailableRaresInZnr = cards.entrySet().stream()
+                        .filter(entry -> entry.getValue().getRarity().equals(Rarity.RARE))
+                        .filter(entry -> entry.getValue().getSet().equals("ZNR"))
+                        .filter(entry -> entry.getValue().isBoosterAvailable())
+                        .count() * CARDS_PER_PLAYSET;
+
+                int numberOfCollectedRaresInZnr = collection.entrySet().stream()
                         .filter(entry -> entry.getKey().getRarity().equals(Rarity.RARE))
                         .filter(entry -> entry.getKey().getSet().equals("ZNR"))
                         .filter(entry -> entry.getKey().isBoosterAvailable())
-                        .forEach(entry -> System.out.println(entry.getValue() + " " + entry.getKey().getName()));
+                        .mapToInt(Map.Entry::getValue)
+                        .sum();
+
+                System.out.println("You have collected " + numberOfCollectedRaresInZnr + " of " +
+                        numberOfAvailableRaresInZnr + " rares in ZNR.");
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);

@@ -38,12 +38,11 @@ class ConsoleApplicationTest {
     }
 
     @Test
-    void mainPrintsExpectedCollectionDataWhenValidArgumentsAreSpecified() throws Exception {
+    void mainPrintsExpectedCompletionSummaryWhenValidArgumentsAreSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
         });
-        assertThat(text, containsString("2 Roiling Vortex\n"));
-        assertThat(text, containsString("4 Kargan Intimidator\n"));
+        assertThat(text, is(equalTo("You have collected 88 of 256 rares in ZNR.\n")));
     }
 
     @Test
