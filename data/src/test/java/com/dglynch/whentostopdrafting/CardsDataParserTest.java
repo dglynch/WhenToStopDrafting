@@ -48,12 +48,28 @@ public class CardsDataParserTest {
 
     @Test
     void readCardsContainsSomeExpectedEntries() {
-        assertThat(cards, hasEntry(69628, new Card(69628, "Steady Aim", "WAR", Rarity.COMMON)));
-        assertThat(cards, hasEntry(69689, new Card(69689, "God-Pharaoh's Statue", "WAR", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(73241, new Card(73241, "Concerted Defense", "ZNR", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(73205, new Card(73205, "Kor Blademaster", "ZNR", Rarity.UNCOMMON)));
-        assertThat(cards, hasEntry(74676, new Card(74676, "Lotus Cobra", "ZNR", Rarity.RARE)));
-        assertThat(cards, hasEntry(70285, new Card(70285, "Robber of the Rich", "ELD", Rarity.MYTHIC_RARE)));
+        assertThat(cards, hasEntry(69628, new Card(69628, "Steady Aim", "WAR", Rarity.COMMON, true)));
+        assertThat(cards, hasEntry(69689, new Card(69689, "God-Pharaoh's Statue", "WAR", Rarity.UNCOMMON, true)));
+        assertThat(cards, hasEntry(73241, new Card(73241, "Concerted Defense", "ZNR", Rarity.UNCOMMON, true)));
+        assertThat(cards, hasEntry(73205, new Card(73205, "Kor Blademaster", "ZNR", Rarity.UNCOMMON, true)));
+        assertThat(cards, hasEntry(73402, new Card(73402, "Lotus Cobra", "ZNR", Rarity.RARE, true)));
+        assertThat(cards, hasEntry(70285, new Card(70285, "Robber of the Rich", "ELD", Rarity.MYTHIC_RARE, true)));
+    }
+
+    @Test
+    void readCardsCanDistinguishNonBoosterAvailableCardsWhereCollectorMaxIsTheEmptyString() {
+        assertThat(cards, hasEntry(70453, new Card(70453, "Taste of Death", "ELD", Rarity.RARE, false)));
+        assertThat(cards, hasEntry(74660, new Card(74660, "Felidar Retreat", "ZNR", Rarity.RARE, false)));
+    }
+
+    @Test
+    void readCardsCanDistinguishNonBoosterAvailableCardsWhereCollectorNumberIsGreaterThanCollectorMax() {
+        assertThat(cards, hasEntry(74673, new Card(74673, "Kazandu Mammoth", "ZNR", Rarity.RARE, false)));
+    }
+
+    @Test
+    void readCardsCanDistinguishNonBoosterAvailableCardsWhereCardIsTheBackSideOfADualFacedCard() {
+        assertThat(cards, hasEntry(73250, new Card(73250, "Glasspool Shore", "ZNR", Rarity.RARE, false)));
     }
 
     @Test

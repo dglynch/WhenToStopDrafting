@@ -25,10 +25,7 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class CardsDataParser {
 
@@ -52,16 +49,30 @@ public class CardsDataParser {
                         int titleId = jsonElement.getAsJsonObject().get("titleId").getAsInt();
                         int rarityId = jsonElement.getAsJsonObject().get("rarity").getAsInt();
                         String set = jsonElement.getAsJsonObject().get("set").getAsString();
+                        OptionalInt collectorNumber = parseInt(jsonElement.getAsJsonObject().get("collectorNumber").getAsString());
+                        OptionalInt collectorMax = parseInt(jsonElement.getAsJsonObject().get("collectorMax").getAsString());
+                        boolean isPrimaryCard = jsonElement.getAsJsonObject().get("isPrimaryCard").getAsBoolean();
 
                         String cardName = localization.get(titleId);
                         Rarity rarity = Rarity.fromInt(rarityId);
+                        boolean boosterAvailable = isPrimaryCard &&
+                                collectorNumber.isPresent() && collectorMax.isPresent() &&
+                                collectorNumber.getAsInt() <= collectorMax.getAsInt();
 
-                        cards.put(grpid, new Card(grpid, cardName, set, rarity));
+                        cards.put(grpid, new Card(grpid, cardName, set, rarity, boosterAvailable));
                     });
 
             return Collections.unmodifiableMap(cards);
         } catch (IOException | NoSuchElementException | JsonParseException e) {
             return Map.of();
+        }
+    }
+
+    private static OptionalInt parseInt(String string) {
+        try {
+            return OptionalInt.of(Integer.parseInt(string));
+        } catch (NumberFormatException e) {
+            return OptionalInt.empty();
         }
     }
 }
