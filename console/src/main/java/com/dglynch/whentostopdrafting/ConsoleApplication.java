@@ -30,6 +30,9 @@ public class ConsoleApplication {
     private static final String DEFAULT_DATA_FILE_PATH_PREFIX =
             System.getenv("ProgramFiles") + "/Wizards of the Coast/MTGA/MTGA_Data/Downloads/Data/";
     private static final int CARDS_PER_PLAYSET = 4;
+    private static final double EXPECTED_MYTHIC_RATE_ZNR = 1.0 / 7.4;
+    private static final double EXPECTED_WILDCARD_RATE = 1.0 / 30;
+    private static final double EXPECTED_RARE_CARD_RATE_ZNR = 1.0 - EXPECTED_MYTHIC_RATE_ZNR - EXPECTED_WILDCARD_RATE;
 
     public static void main(String[] args) {
         String playerLogFilePath = Arrays.stream(args).findFirst().orElse(DEFAULT_PLAYER_LOG_FILE_PATH);
@@ -73,6 +76,9 @@ public class ConsoleApplication {
                         numberOfAvailableRaresInZnr + " rares in ZNR.");
 
                 System.out.println("You have " + inventory.get("ZNR") + " unopened booster packs of ZNR.");
+
+                System.out.printf("You can expect to open %.1f more rares from your booster packs.%n",
+                        inventory.get("ZNR") * EXPECTED_RARE_CARD_RATE_ZNR);
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);

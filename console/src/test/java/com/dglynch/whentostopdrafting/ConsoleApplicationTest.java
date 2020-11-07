@@ -54,6 +54,14 @@ class ConsoleApplicationTest {
     }
 
     @Test
+    void mainPrintsExpectedCompletionFromOpeningPacksWhenValidArgumentsAreSpecified() throws Exception {
+        String text = tapSystemOutNormalized(() -> {
+            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
+        });
+        assertThat(text, containsString("You can expect to open 58.2 more rares from your booster packs.\n"));
+    }
+
+    @Test
     void mainPrintsExpectedMessageWhenSpecifiedPlayerLogFileIsMissingData() throws Exception {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/missingdata.log", "src/test/resources/"});
