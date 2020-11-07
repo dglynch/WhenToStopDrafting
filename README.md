@@ -6,9 +6,9 @@ The goal of this project is to help players of *Magic: The Gathering Arena* deci
 set and open all their booster packs, especially if they are following
 [Rich Stein's MTG Arena Free to Play Guide](https://www.hipstersofthecoast.com/2020/09/mtg-arena-zendikar-rising-free-to-play-guide/).
 
-Currently, the program is only capable of reading the player's card collection and booster pack inventory data from the game log, and printing a summary of it to
-the console. The remaining features will be added in the future. The project is not very useful yet, but contributions
-and criticism are welcome.
+Currently, the program reads your ZNR collection and your inventory of unopened ZNR booster packs from your Player.log
+file. It summarizes both, and tells you how many actual rare cards (not mythic rares or wildcards) you can expect to
+open from those packs. More features will be added in the future. Contributions and criticism are welcome.
 
 ## License
 
