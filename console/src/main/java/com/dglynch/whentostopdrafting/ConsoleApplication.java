@@ -46,8 +46,8 @@ public class ConsoleApplication {
             CardsDataParser cardsDataParser = new CardsDataParser(cardsDataFilePath, localization);
             Map<Integer, Card> cards = cardsDataParser.readCards();
 
-            LogParser logParser = new LogParser(playerLogFilePath);
-            Map<Card, Integer> collection = logParser.readCollection().entrySet().stream()
+            CollectionParser collectionParser = new CollectionParser(playerLogFilePath);
+            Map<Card, Integer> collection = collectionParser.readCollection().entrySet().stream()
                     .collect(Collectors.toMap(entry -> cards.get(Integer.valueOf(entry.getKey())), Map.Entry::getValue));
 
             if (collection.isEmpty()) {

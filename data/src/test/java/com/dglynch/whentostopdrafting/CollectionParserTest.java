@@ -27,14 +27,14 @@ import java.util.Map;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class LogParserTest {
+class CollectionParserTest {
 
     private static Map<String, Integer> collection;
 
     @BeforeAll
     static void beforeAll() {
-        LogParser logParser = new LogParser("src/test/resources/collection.log");
-        collection = logParser.readCollection();
+        CollectionParser collectionParser = new CollectionParser("src/test/resources/collection.log");
+        collection = collectionParser.readCollection();
     }
 
     @Test
@@ -68,15 +68,15 @@ class LogParserTest {
 
     @Test
     void readCollectionReturnsEmptyMapWhenInputDataIsMissing() {
-        LogParser logParser = new LogParser("src/test/resources/missingcollection.log");
-        Map<String, Integer> missingCollection = logParser.readCollection();
+        CollectionParser collectionParser = new CollectionParser("src/test/resources/missingcollection.log");
+        Map<String, Integer> missingCollection = collectionParser.readCollection();
         assertThat(missingCollection, is(anEmptyMap()));
     }
 
     @Test
     void readCollectionReturnsEmptyMapWhenInputDataIsMalformed() {
-        LogParser logParser = new LogParser("src/test/resources/malformedcollection.log");
-        Map<String, Integer> malformedCollection = logParser.readCollection();
+        CollectionParser collectionParser = new CollectionParser("src/test/resources/malformedcollection.log");
+        Map<String, Integer> malformedCollection = collectionParser.readCollection();
         assertThat(malformedCollection, is(anEmptyMap()));
     }
 }

@@ -29,12 +29,12 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class LogParser {
+public class CollectionParser {
     private static final String COLLECTION_PREFIX = "[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerCardsV3 ";
 
     private final String logFilePath;
 
-    public LogParser(String logFilePath) {
+    public CollectionParser(String logFilePath) {
         this.logFilePath = logFilePath;
     }
 
