@@ -68,7 +68,7 @@ class CollectionParserTest {
 
     @Test
     void readCollectionReturnsEmptyMapWhenInputDataIsMissing() {
-        CollectionParser collectionParser = new CollectionParser("src/test/resources/missingcollection.log");
+        CollectionParser collectionParser = new CollectionParser("src/test/resources/missingdata.log");
         Map<String, Integer> missingCollection = collectionParser.readCollection();
         assertThat(missingCollection, is(anEmptyMap()));
     }
