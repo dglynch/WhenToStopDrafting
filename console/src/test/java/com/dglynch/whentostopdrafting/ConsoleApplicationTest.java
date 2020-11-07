@@ -38,11 +38,18 @@ class ConsoleApplicationTest {
     }
 
     @Test
-    void mainPrintsExpectedCompletionAndInventorySummaryWhenValidArgumentsAreSpecified() throws Exception {
+    void mainPrintsExpectedCompletionWhenValidArgumentsAreSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
         });
         assertThat(text, containsString("You have collected 88 of 256 rares in ZNR.\n"));
+    }
+
+    @Test
+    void mainPrintsExpectedInventorySummaryWhenValidArgumentsAreSpecified() throws Exception {
+        String text = tapSystemOutNormalized(() -> {
+            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
+        });
         assertThat(text, containsString("You have 70 unopened booster packs of ZNR.\n"));
     }
 
