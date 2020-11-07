@@ -50,6 +50,9 @@ public class ConsoleApplication {
             Map<Card, Integer> collection = collectionParser.readCollection().entrySet().stream()
                     .collect(Collectors.toMap(entry -> cards.get(Integer.valueOf(entry.getKey())), Map.Entry::getValue));
 
+            InventoryParser inventoryParser = new InventoryParser(playerLogFilePath);
+            Map<String, Integer> inventory = inventoryParser.readInventory();
+
             if (collection.isEmpty()) {
                 System.out.println("No collection data found at " + playerLogFilePath);
             } else {
@@ -68,6 +71,8 @@ public class ConsoleApplication {
 
                 System.out.println("You have collected " + numberOfCollectedRaresInZnr + " of " +
                         numberOfAvailableRaresInZnr + " rares in ZNR.");
+
+                System.out.println("You have " + inventory.get("ZNR") + " unopened booster packs of ZNR.");
             }
         } catch (IOException e) {
             System.out.println("Failed to find required data files at " + dataFilePathPrefix);

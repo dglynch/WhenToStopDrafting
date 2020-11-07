@@ -38,36 +38,37 @@ class ConsoleApplicationTest {
     }
 
     @Test
-    void mainPrintsExpectedCompletionSummaryWhenValidArgumentsAreSpecified() throws Exception {
+    void mainPrintsExpectedCompletionAndInventorySummaryWhenValidArgumentsAreSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
+            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
         });
-        assertThat(text, is(equalTo("You have collected 88 of 256 rares in ZNR.\n")));
+        assertThat(text, containsString("You have collected 88 of 256 rares in ZNR.\n"));
+        assertThat(text, containsString("You have 70 unopened booster packs of ZNR.\n"));
     }
 
     @Test
     void mainDoesNotPrintCardsNotFromZendikarRising() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/"});
+            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
         });
         assertThat(text, not(containsString("Burning Sun's Avatar")));
         assertThat(text, not(containsString("Emergent Ultimatum")));
     }
 
     @Test
-    void mainPrintsExpectedMessageWhenSpecifiedPlayerLogFileIsMissingCollectionData() throws Exception {
+    void mainPrintsExpectedMessageWhenSpecifiedPlayerLogFileIsMissingData() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/missingcollection.log", "src/test/resources/"});
+            ConsoleApplication.main(new String[]{"src/test/resources/missingdata.log", "src/test/resources/"});
         });
-        assertThat(text, is(equalTo("No collection data found at src/test/resources/missingcollection.log\n")));
+        assertThat(text, is(equalTo("No collection data found at src/test/resources/missingdata.log\n")));
     }
 
     @Test
-    void mainPrintsExpectedMessageWhenCollectionDataInSpecifiedPlayerLogFileIsMalformed() throws Exception {
+    void mainPrintsExpectedMessageWhenDataInSpecifiedPlayerLogFileIsMalformed() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/malformedcollection.log", "src/test/resources/"});
+            ConsoleApplication.main(new String[]{"src/test/resources/malformed.log", "src/test/resources/"});
         });
-        assertThat(text, is(equalTo("No collection data found at src/test/resources/malformedcollection.log\n")));
+        assertThat(text, is(equalTo("No collection data found at src/test/resources/malformed.log\n")));
     }
 
     @Test
@@ -81,7 +82,7 @@ class ConsoleApplicationTest {
     @Test
     void mainPrintsExpectedMessageWhenInvalidDownloadsDataPathPrefixIsSpecified() throws Exception {
         String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/collection.log", "src/test/resources/foobarbaz/"});
+            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/foobarbaz/"});
         });
         assertThat(text, is(equalTo("Failed to find required data files at src/test/resources/foobarbaz/\n")));
     }

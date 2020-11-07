@@ -1,0 +1,7 @@
+Pubnub Client created successfully.
+Registering PubNub listeners.
+Subscribing to PubNub.
+Initializing presence from social
+[UnityCrossThreadLogger]<== Deck.GetDeckLimit {"id":10,"payload":75}
+[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerInventory {"id":13,"payload":{"this is malformed data
+[UnityCrossThreadLogger]<== Survey.GetConfig {"id":17,"payload":{"postMatchSurvey":{"ExcludeEvents":["NPE"],"Chance":1.0,"Question":"RateMatch","Options":"YesNo"}}}
