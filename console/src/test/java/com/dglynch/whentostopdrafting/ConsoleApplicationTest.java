@@ -47,15 +47,6 @@ class ConsoleApplicationTest {
     }
 
     @Test
-    void mainDoesNotPrintCardsNotFromZendikarRising() throws Exception {
-        String text = tapSystemOutNormalized(() -> {
-            ConsoleApplication.main(new String[]{"src/test/resources/Player.log", "src/test/resources/"});
-        });
-        assertThat(text, not(containsString("Burning Sun's Avatar")));
-        assertThat(text, not(containsString("Emergent Ultimatum")));
-    }
-
-    @Test
     void mainPrintsExpectedMessageWhenSpecifiedPlayerLogFileIsMissingData() throws Exception {
         String text = tapSystemOutNormalized(() -> {
             ConsoleApplication.main(new String[]{"src/test/resources/missingdata.log", "src/test/resources/"});
